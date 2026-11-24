@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+ match /databases/{database}/documents {
+  match /cards/main {
+   allow read: if true;
+   allow create, update: if request.auth != null
+    && request.auth.uid == 'JkwdFyy11VcK5ZaMFZJE2gymyEh2'
+    && request.resource.data.keys().hasOnly(['days','updatedAt'])
+    && request.resource.data.days is list
+    && request.resource.data.days.size() <= 10
+    && request.resource.data.days.toSet().size() == request.resource.data.days.size()
+    && request.resource.data.updatedAt == request.time;
+   allow delete: if false;
+  }
+ }
+}
