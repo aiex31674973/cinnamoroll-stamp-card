@@ -101,6 +101,4 @@ $('fortune').onclick = e => {
         particles[rarity]
     );
 };
-
-
 const hour=Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Taipei',hour:'2-digit',hourCycle:'h23'}).format(new Date()));$('greeting').textContent=(hour<12?'早安':hour<18?'午安':'晚安')+'！歡迎來到你的小小幸福基地 ♡';
