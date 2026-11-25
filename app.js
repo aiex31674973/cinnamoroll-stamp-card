@@ -19,7 +19,88 @@ $('add').onclick=()=>change('add');$('undo').onclick=()=>{if(confirm('取消最�
 }render();
 
 function burst(x,y,n=14){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;for(let i=0;i<n;i++){const el=document.createElement('span');el.className='spark';el.textContent=['💛','⭐','✨','🩵'][i%4];el.style.left=x+'px';el.style.top=y+'px';el.style.setProperty('--dx',(Math.random()-.5)*300+'px');el.style.setProperty('--dy',(-30-Math.random()*180)+'px');document.body.append(el);setTimeout(()=>el.remove(),1100)}}
-$('heart').onclick=e=>{burst(e.clientX||innerWidth/2,e.clientY||innerHeight/2);$('wish').textContent='送你一顆暖暖的愛心！'};
-const wishes=['今天的你也很棒！','把小小的快樂都收集起來吧！','記得休息一下，喝口水喔！','願你今天遇見好多好事！','送你一朵軟綿綿的雲！'];
-$('fortune').onclick=e=>{const choices=wishes.filter(w=>w!==$('wish').textContent);$('wish').textContent=choices[Math.floor(Math.random()*choices.length)];burst(e.clientX||innerWidth/2,e.clientY||innerHeight/2,8)};
+
+const wishes = {
+    N: [
+        '今天的你也很棒！',
+        '把小小的快樂都收集起來吧！',
+        '記得休息一下，喝口水喔！',
+        '願你今天遇見好多好事！',
+        '送你一朵軟綿綿的雲！'
+    ],
+    R: [
+        '今天也有偷偷想你喔！',
+        '辛苦了，給你一個大大的抱抱！',
+        '希望你每天都有值得微笑的理由！'
+    ],
+    SR: [
+        '今天的好運用完了也沒關係，我分你一點！',
+        '你是今天最值得珍藏的小幸福！'
+    ],
+    SSR: [
+        '恭喜你抽到了我偷偷藏起來的想念！',
+        '全世界有這麼多人，但我最喜歡你！'
+    ]
+};
+
+$('fortune').onclick = e => {
+    const r = Math.random();
+    let rarity;
+
+    if (r < 0.70) {
+        rarity = 'N';
+    } else if (r < 0.95) {
+        rarity = 'R';
+    } else if (r < 0.99) {
+        rarity = 'SR';
+    } else {
+        rarity = 'SSR';
+    }
+
+    const styles = {
+        N:   { label: '☁️ N 普通', color: '#729bc2' },
+        R:   { label: '💗 R 暖心', color: '#d66b9a' },
+        SR:  { label: '💎 SR 稀有', color: '#9562cc' },
+        SSR: { label: '👑 SSR 隱藏版', color: '#d49b00' }
+    };
+
+    const pool = wishes[rarity];
+    const message = pool[Math.floor(Math.random() * pool.length)];
+    const wish = $('wish');
+
+    wish.replaceChildren();
+
+    const label = document.createElement('strong');
+    label.textContent = styles[rarity].label;
+    label.style.color = styles[rarity].color;
+    label.style.display = 'block';
+    label.style.fontSize = '1.5em';
+    label.style.marginBottom = '10px';
+
+    const content = document.createElement('span');
+    content.textContent = message;
+
+    wish.append(label, content);
+
+    wish.animate([
+        { transform: 'scale(0.8)', opacity: 0 },
+        { transform: 'scale(1.08)', opacity: 1 },
+        { transform: 'scale(1)', opacity: 1 }
+    ], { duration: 500 });
+
+    const particles = {
+        N: 8,
+        R: 18,
+        SR: 35,
+        SSR: 80
+    };
+
+    burst(
+        e.clientX || innerWidth / 2,
+        e.clientY || innerHeight / 2,
+        particles[rarity]
+    );
+};
+
+
 const hour=Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Taipei',hour:'2-digit',hourCycle:'h23'}).format(new Date()));$('greeting').textContent=(hour<12?'早安':hour<18?'午安':'晚安')+'！歡迎來到你的小小幸福基地 ♡';
