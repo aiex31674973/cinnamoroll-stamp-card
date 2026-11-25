@@ -2,4 +2,59 @@
 *{box-sizing:border-box}body{margin:0;background:#fff8db;color:#79512e;font-family:system-ui,sans-serif;text-align:center}main{max-width:900px;margin:auto;padding:24px 12px}h1{font-size:24px}.card{position:relative;width:100%;overflow:hidden;border-radius:18px;box-shadow:0 6px 24px #ad87332b}.base{width:100%;display:block}.stamp{position:absolute;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);object-fit:contain;pointer-events:none}.bar{height:12px;background:#f2e4ae;border-radius:20px;overflow:hidden}.bar i{display:block;height:100%;background:#83b7e0;transition:width .4s}button,input{font:inherit;padding:10px 14px;border-radius:12px;border:1px solid #d9bb67;margin:4px;background:white;color:#79512e}button{cursor:pointer}button:disabled{opacity:.5;cursor:default}#add{background:#ffe184}#status{min-height:1.5em}details{margin-top:25px}#celebrate{font-size:24px;animation:pop .6s ease}@keyframes pop{from{transform:scale(.5)}to{transform:scale(1)}}[hidden]{display:none!important}
 
 body{background:radial-gradient(circle at 20% 10%,#fff 0,transparent 28%),linear-gradient(145deg,#fff1b8,#fffaf0 55%,#dcefff);min-height:100vh}main{position:relative;z-index:1}h1{font-size:clamp(24px,5vw,38px);margin-bottom:6px} .panel{background:#ffffffb8;border:2px solid #fff;border-radius:24px;padding:18px;margin:16px 0;box-shadow:0 8px 24px #a88b3320}.card{border:4px solid white}.float{position:fixed;pointer-events:none;z-index:0;font-size:45px;animation:drift 7s ease-in-out infinite;opacity:.65}@keyframes drift{50%{transform:translateY(-20px) rotate(8deg)}}.spark{position:fixed;pointer-events:none;z-index:9;animation:fly 1s ease-out forwards}@keyframes fly{to{transform:translate(var(--dx),var(--dy)) rotate(45deg);opacity:0}}.stamp.new{animation:stamp .5s cubic-bezier(.2,.8,.3,1.4)}@keyframes stamp{from{transform:translate(-50%,-50%) scale(1.8);opacity:0}to{transform:translate(-50%,-50%) scale(1)}}button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 10px #bca45b40}button{transition:.2s}#history{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}#history span{background:#eaf5ff;border-radius:20px;padding:6px 12px;font-size:13px}#wish{min-height:1.5em}#greeting{color:#668db0} .play{background:#e3f3ff;border-color:#b5d8ed} @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
-</style><div class="float" style="left:3%;top:12%">☁️</div><div class="float" style="right:4%;top:25%;animation-delay:-2s">⭐</div><div class="float" style="left:5%;bottom:12%;animation-delay:-4s">💛</div><div class="float" style="right:5%;bottom:8%">☁️</div><main><h1>☁️ 每天一點小幸福 ☁️</h1><p id="greeting"></p><div class="card" id="card"><img class="base" src="card.png" alt="大耳狗十點集點卡"></div><section class="panel"><h2 id="count">讀取中…</h2><div class="bar"><i id="progress" style="width:0"></i></div><p id="celebrate" hidden>🎉 集滿十點啦！恭喜你！ 🎁</p><p id="status" role="status"></p><section id="controls" hidden><button id="add">蓋上一個印章</button><button id="undo">取消最後一點</button><button id="reset">重新集點</button><button id="logout">登出</button></section></section><section class="panel"><h2>☁️ 小小幸福補給站</h2><button class="play" id="fortune">⭐ 抽一句小語</button><p id="wish" aria-live="polite">今天也要開開心心！</p><h3>集點回憶</h3><div id="history"></div></section><details id="login"><summary>管理員登入</summary><form id="form"><input id="email" type="email" placeholder="電子郵件" required autocomplete="username"><input id="password" type="password" placeholder="密碼" required autocomplete="current-password"><button>登入</button></form></details></main><script type="module" src="app.js"></script></html>
+</style><div class="float" style="left:3%;top:12%">☁️</div><div class="float" style="right:4%;top:25%;animation-delay:-2s">⭐</div><div class="float" style="left:5%;bottom:12%;animation-delay:-4s">💛</div><div class="float" style="right:5%;bottom:8%">☁️</div><main><h1>☁️ 每天一點小幸福 ☁️</h1><p id="greeting"></p><div class="card" id="card"><img class="base" src="card.png" alt="大耳狗十點集點卡"></div><section class="panel"><h2 id="count">讀取中…</h2><div class="bar"><i id="progress" style="width:0"></i></div><p id="celebrate" hidden>🎉 集滿十點啦！恭喜你！ 🎁</p><p id="status" role="status"></p><section id="controls" hidden><button id="add">蓋上一個印章</button><button id="undo">取消最後一點</button><button id="reset">重新集點</button><button id="logout">登出</button></section></section><section class="panel"><h2>☁️ 小小幸福補給站</h2><button class="play" id="fortune">⭐ 抽一句小語</button><p id="wish" aria-live="polite">今天也要開開心心！</p><h3>集點回憶</h3><div id="history"></div></section>
+<section style="position:relative;margin:25px 0;padding:20px;
+background:linear-gradient(135deg,#fff9e7,#e8f3ff);
+border:2px solid white;border-radius:24px;">
+
+    <h2>✨ 聖亞的小小休息室 ✨</h2>
+
+    <div id="seia-talk" style="background:white;
+    border-radius:20px;padding:15px;margin:10px auto;
+    max-width:350px;">
+        今天也來看看我了呢。
+    </div>
+
+    <img src="seia.png" alt="聖亞"
+    style="width:220px;max-width:80%;cursor:pointer;
+    filter:drop-shadow(0 6px 8px #d8b66b50);"
+    onclick="seiaSpeak(this)">
+
+    <p style="font-size:13px;opacity:0.6;">
+        點擊聖亞，看看她想說什麼！
+    </p>
+
+</section>
+
+<script>
+function seiaSpeak(img) {
+    const lines = [
+        '今天也來看看我了呢。',
+        '你今天過得還好嗎？',
+        '偶爾停下腳步，也是很重要的。',
+        '我已經預見了你今天的好運。',
+        '未來的事情，就留給未來吧。',
+        '再陪我一下，好嗎？'
+    ];
+
+    const talk = document.getElementById('seia-talk');
+    const choices = lines.filter(
+        line => line !== talk.textContent.trim()
+    );
+
+    talk.textContent =
+        choices[Math.floor(Math.random() * choices.length)];
+
+    img.animate([
+        {transform:'translateY(0)'},
+        {transform:'translateY(-15px) rotate(-3deg)'},
+        {transform:'translateY(0)'}
+    ],{duration:450});
+
+    talk.animate([
+        {opacity:0,transform:'scale(0.9)'},
+        {opacity:1,transform:'scale(1)'}
+    ],{duration:300});
+}
+</script>
+<details id="login"><summary>管理員登入</summary><form id="form"><input id="email" type="email" placeholder="電子郵件" required autocomplete="username"><input id="password" type="password" placeholder="密碼" required autocomplete="current-password"><button>登入</button></form></details></main><script type="module" src="app.js"></script></html>
